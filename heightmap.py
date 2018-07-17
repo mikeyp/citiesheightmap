@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import struct
 import numpy as np
 import scipy.ndimage
@@ -22,7 +24,7 @@ from affine import Affine
 imsize = 3601
 hisize = 1081
 
-water_url = "https://dds.cr.usgs.gov/srtm/version2_1/SWBD/SWBD%s/%s%se.zip"
+water_url = "https://dds.cr.usgs.gov/srtm/version2_1/SWBD/SWBD%s/%s%sn.zip"
 land_url = "https://s3.amazonaws.com/elevation-tiles-prod/skadi/{y}/{y}{x}.hgt.gz"
 
 BBox = namedtuple('BBox', ['top', 'bottom', 'left', 'right'])
@@ -96,7 +98,7 @@ def lookup(lat, lon):
         strlon = "W%03d" % -math.floor(lon)
         wurl = water_url % ('west', strlon.lower(), strlat.lower())
 
-    water_name = "%s%se" % (strlon.lower(), strlat.lower())
+    water_name = "%s%sn" % (strlon.lower(), strlat.lower())
     lurl = land_url.format(y=strlat, x=strlon)
     land_name = "%s%s" % (strlat, strlon)
 
